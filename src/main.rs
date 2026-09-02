@@ -91,3 +91,21 @@ fn main() {
     // Execute the entry method uniformly over the whole tree structure
     root_dir.print("");
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn file_creation() {
+        let _f = File::new("test.txt");
+    }
+
+    #[test]
+    fn directory_nesting() {
+        let mut d = Directory::new("dir");
+        d.add(Box::new(File::new("a.txt")));
+        let mut root = Directory::new("root");
+        root.add(Box::new(d));
+    }
+}
