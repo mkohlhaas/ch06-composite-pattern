@@ -3,12 +3,18 @@
 // A classic example of the composite pattern is a computer file system where both File (Leaf) and
 // Directory (Composite) can display their contents uniformly.
 
-// 1. The Component Trait
+// ====================== //
+// 1. The Component Trait //
+// ====================== //
+
 trait FileSystemItem {
     fn print(&self, indent: &str);
 }
 
-// 2. The Leaf Node
+// ================ //
+// 2. The Leaf Node //
+// ================ //
+
 struct File {
     name: String,
 }
@@ -27,7 +33,10 @@ impl FileSystemItem for File {
     }
 }
 
-// 3. The Composite Node
+// ===================== //
+// 3. The Composite Node //
+// ===================== //
+
 struct Directory {
     name: String,
     // We use Box<dyn FileSystemItem> to store different types in the same vector
@@ -59,6 +68,10 @@ impl FileSystemItem for Directory {
         }
     }
 }
+
+// ===== //
+// Usage //
+// ===== //
 
 fn main() {
     // Construct individual leaf nodes
