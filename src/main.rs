@@ -98,11 +98,15 @@ mod tests {
 
     #[test]
     fn file_creation() {
+        // test.txt
         let _f = File::new("test.txt");
     }
 
     #[test]
     fn directory_nesting() {
+        // root/
+        //   dir/
+        //     a.txt
         let mut d = Directory::new("dir");
         d.add(Box::new(File::new("a.txt")));
         let mut root = Directory::new("root");
@@ -111,17 +115,24 @@ mod tests {
 
     #[test]
     fn empty_directory() {
+        // empty/
         let _d = Directory::new("empty");
     }
 
     #[test]
     fn single_file_in_directory() {
+        // dir/
+        //   file.txt
         let mut d = Directory::new("dir");
         d.add(Box::new(File::new("file.txt")));
     }
 
     #[test]
     fn directory_with_multiple_files() {
+        // dir/
+        //   a.txt
+        //   b.txt
+        //   c.txt
         let mut d = Directory::new("dir");
         d.add(Box::new(File::new("a.txt")));
         d.add(Box::new(File::new("b.txt")));
@@ -130,6 +141,9 @@ mod tests {
 
     #[test]
     fn nested_directory_one_level() {
+        // outer/
+        //   inner/
+        //     inner_file.txt
         let mut inner = Directory::new("inner");
         inner.add(Box::new(File::new("inner_file.txt")));
         let mut outer = Directory::new("outer");
@@ -138,6 +152,10 @@ mod tests {
 
     #[test]
     fn deep_nesting_three_levels() {
+        // level1/
+        //   level2/
+        //     level3/
+        //       deep.txt
         let mut level3 = Directory::new("level3");
         level3.add(Box::new(File::new("deep.txt")));
         let mut level2 = Directory::new("level2");
@@ -148,6 +166,10 @@ mod tests {
 
     #[test]
     fn directory_with_mixed_children() {
+        // mixed/
+        //   file.txt
+        //   sub/
+        //     sub_file.txt
         let mut d = Directory::new("mixed");
         d.add(Box::new(File::new("file.txt")));
         let mut sub = Directory::new("sub");
@@ -157,6 +179,11 @@ mod tests {
 
     #[test]
     fn multiple_sibling_directories() {
+        // root/
+        //   d1/
+        //     f1.txt
+        //   d2/
+        //     f2.txt
         let mut root = Directory::new("root");
         let mut d1 = Directory::new("d1");
         d1.add(Box::new(File::new("f1.txt")));
@@ -168,6 +195,12 @@ mod tests {
 
     #[test]
     fn complex_tree() {
+        // root/
+        //   root_file.txt
+        //   src/
+        //     main.rs
+        //     tests/
+        //       test.rs
         let mut root = Directory::new("root");
         root.add(Box::new(File::new("root_file.txt")));
         let mut src = Directory::new("src");
@@ -180,6 +213,12 @@ mod tests {
 
     #[test]
     fn very_deep_nesting_five_levels() {
+        // d1/
+        //   d2/
+        //     d3/
+        //       d4/
+        //         d5/
+        //           deepest.txt
         let mut d5 = Directory::new("d5");
         d5.add(Box::new(File::new("deepest.txt")));
         let mut d4 = Directory::new("d4");
@@ -194,6 +233,11 @@ mod tests {
 
     #[test]
     fn large_sibling_set() {
+        // root/
+        //   file0.txt
+        //   file1.txt
+        //   ...
+        //   file9.txt
         let mut root = Directory::new("root");
         for i in 0..10 {
             root.add(Box::new(File::new(&format!("file{}.txt", i))));
