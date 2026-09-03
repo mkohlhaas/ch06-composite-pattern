@@ -75,21 +75,21 @@ impl FileSystemItem for Directory {
 
 fn main() {
     // Construct individual leaf nodes
-    let file1 = Box::new(File::new("Cargo.toml"));
-    let file2 = Box::new(File::new("main.rs"));
-    let file3 = Box::new(File::new("README.md"));
+    let cargo = Box::new(File::new("Cargo.toml"));
+    let main = Box::new(File::new("main.rs"));
+    let readme = Box::new(File::new("README.md"));
 
     // Build the structural composite hierarchy
     let mut src_dir = Directory::new("src");
-    src_dir.add(file2);
+    src_dir.add(main);
 
-    let mut root_dir = Directory::new("project");
-    root_dir.add(file1);
-    root_dir.add(file3);
-    root_dir.add(Box::new(src_dir)); // Nesting a composite into a composite
+    let mut prj_root_dir = Directory::new("project");
+    prj_root_dir.add(cargo);
+    prj_root_dir.add(readme);
+    prj_root_dir.add(Box::new(src_dir)); // Nesting a composite into a composite!!!
 
     // Execute the entry method uniformly over the whole tree structure
-    root_dir.print("");
+    prj_root_dir.print("");
 }
 
 #[cfg(test)]
